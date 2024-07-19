@@ -45,9 +45,106 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
 </table>
 
+
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+
+
+
+
+
+
+
+-------------------------------------------------
+###Gabriel Bot App Configuration Set up
+
+
+### Step 1: Verify Node.js and npm Versions
+
+Ensure that you have the required versions of Node.js (at least 18.0.0) and npm installed. Run the following commands to check:
+
+```bash
+node -v
+npm -v
+```
+
+If the versions are not as required, download and install the latest version of Node.js from [nodejs.org](https://nodejs.org/).
+
+### Step 2: Clear npm Cache
+
+Sometimes, clearing the npm cache can resolve the issue. Lets Run:
+
+```bash
+npm cache clean --force
+```
+
+### Step 3: Install create-probot-app Globally
+
+Try installing `create-probot-app` globally:
+
+```bash
+npm install -g create-probot-app
+```
+
+### Step 4: Create the App 
+Then try running the command again:
+
+```bash
+create-probot-app my-first-app
+```
+![image](https://github.com/user-attachments/assets/943b065f-fb34-4383-8784-ce2e08f97357)
+
+When the command is run; we see a series of output and a `dir ` with the name of the app is created as shown in the below
+
+![Screenshot 2024-07-19 002223](https://github.com/user-attachments/assets/1e9b1d56-727b-4d40-99b5-1319a7e44268)
+
+App is successfully created; 
+
+![image](https://github.com/user-attachments/assets/50827d30-0df3-42ff-a65f-9b7fd6f9ab44)
+
+### Step 5: Start the App
+
+Here we can see the details of the newly created `dir ` and the contents of the `index.js` file
+![image](https://github.com/user-attachments/assets/e871291e-8622-4403-8484-6dea605d2018)
+
+Run the following command to start the app
+```bash
+cd my-first-app
+npm start
+```
+App running on `port:3000`
+![image](https://github.com/user-attachments/assets/f2075c97-fbba-43ca-972b-36d6bc22fb3c)
+
+When you click on `Register GitHub App` should get an error that says
+![image](https://github.com/user-attachments/assets/bb4debf6-064b-45ae-a61b-79c1283304a2)
+
+This is because this App is not created using a Manifest file
+
+###Step 6: Configuring the App
+
+To run your app in development, you will need to configure a GitHub App's APP_ID, PRIVATE_KEY, WEBHOOK_SECRET, and WEBHOOK_PROXY_URL in order to receive webhooks to your local machine.
+
+On your local machine, copy `.env.example` to `.env` in the same directory. We're going to be changing a few things in this new file.
+Go to `smee.io` and click Start a new channel. Set `WEBHOOK_PROXY_URL` to the URL that you are redirected to.
+When this is done; add the `smee` client to your local machine. 
+We need the `smee` to send payloads to our local machine
+Run the following command
+```bash
+npm install --global smee-client
+```
+![image](https://github.com/user-attachments/assets/be626f81-133b-4d66-8146-e5ff1eed7f46)
+
+Then the smee command will forward webhooks from smee.io to your local development environment.
+```bash
+smee -u <https://your webhook-proxy-url>
+```
+
+
+
+
+
